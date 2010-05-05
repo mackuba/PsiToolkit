@@ -75,12 +75,9 @@
 
 - (NSDate *) psMidnight {
   NSCalendar *calendar = [NSCalendar currentCalendar];
-  NSDateComponents *interval = [calendar components: NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit
-                                           fromDate: self];
-  interval.hour = -interval.hour;
-  interval.minute = -interval.minute;
-  interval.second = -interval.second;
-  return [calendar dateByAddingComponents: interval toDate: self options: 0];
+  NSUInteger fieldFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+  NSDateComponents *fields = [calendar components: fieldFlags fromDate: self];
+  return [calendar dateFromComponents: fields];
 }
 
 - (NSString *) psJSONDateFormat {
