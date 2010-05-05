@@ -20,8 +20,10 @@
 
 - (NSArray *) psSortedArrayUsingField: (NSString *) field ascending: (BOOL) ascending {
   NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey: field ascending: ascending];
-  NSArray *sortedArray = [self sortedArrayUsingDescriptors: PSArray(descriptor)];
+  NSArray *descriptors = [[NSArray alloc] initWithObjects: descriptor, nil];
+  NSArray *sortedArray = [self sortedArrayUsingDescriptors: descriptors];
   [descriptor release];
+  [descriptors release];
   return sortedArray;
 }
 
@@ -66,8 +68,8 @@
 }
 
 - (BOOL) psIsEarlierThanOrEqualTo: (NSDate *) otherDate {
-  NSDate *current = [self midnight];
-  NSDate *other = [otherDate midnight];
+  NSDate *current = [self psMidnight];
+  NSDate *other = [otherDate psMidnight];
   return ([current earlierDate: other] == current);
 }
 
@@ -88,8 +90,8 @@
 
 @implementation NSNull (PsiToolkit)
 
-- (BOOL) isBlank {
-  return true;
+- (BOOL) psIsBlank {
+  return YES;
 }
 
 @end

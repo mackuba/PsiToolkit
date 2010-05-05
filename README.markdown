@@ -9,4 +9,4 @@ Feel free to use the code if you happen to find it useful, but don't expect much
 ## License
 
 Copyright by Jakub Suder <jakub.suder at gmail.com>, licensed under [WTFPL license](http://sam.zoy.org/wtfpl/)
-(which means you can do what the ...whatever you want to with it).
+(which means you can do what the ... whatever you want to with it).

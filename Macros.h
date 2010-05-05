@@ -42,7 +42,7 @@
                                                       object: self \
                                                     userInfo: (data)]
 
-#define PSNotify(notification) NotifyWithData((notification), nil)
+#define PSNotify(notification) PSNotifyWithData((notification), nil)
 
 #define PSRelease(...) \
   NSArray *_releaseList = [[NSArray alloc] initWithObjects: __VA_ARGS__, nil]; \

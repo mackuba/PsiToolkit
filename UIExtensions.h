@@ -9,7 +9,7 @@
 
 @interface UIAlertView (PsiToolkit)
 + (void) psShowAlertWithTitle: (NSString *) title message: (NSString *) message;
-+ (void) psShowError: (NSString *) message;
++ (void) psShowErrorWithMessage: (NSString *) message;
 @end
 
 @interface UIView (PsiToolkit)

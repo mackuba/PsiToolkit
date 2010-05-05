@@ -22,7 +22,7 @@
   [alert release];
 }
 
-+ (void) psShowError: (NSString *) message {
++ (void) psShowErrorWithMessage: (NSString *) message {
   [self psShowAlertWithTitle: PSTranslate(@"Error") message: message];
 }
 
@@ -38,7 +38,7 @@
 
 - (void) psMoveVerticallyTo: (CGFloat) position {
   CGRect frame = self.frame;
-  frame.origin.y = pixels;
+  frame.origin.y = position;
   self.frame = frame;
 }
 
@@ -50,7 +50,7 @@
 
 - (void) psMoveHorizontallyTo: (CGFloat) position {
   CGRect frame = self.frame;
-  frame.origin.x = pixels;
+  frame.origin.x = position;
   self.frame = frame;
 }
 
@@ -62,7 +62,7 @@
 
 - (void) psResizeVerticallyTo: (CGFloat) position {
   CGRect frame = self.frame;
-  frame.size.height = pixels;
+  frame.size.height = position;
   self.frame = frame;
 }
 
@@ -74,7 +74,7 @@
 
 - (void) psResizeHorizontallyTo: (CGFloat) position {
   CGRect frame = self.frame;
-  frame.size.width = pixels;
+  frame.size.width = position;
   self.frame = frame;
 }
 
