@@ -5,6 +5,8 @@
 // Licensed under WTFPL license
 // -------------------------------------------------------
 
+#import <Foundation/Foundation.h>
+
 @interface NSArray (PsiToolkit)
 - (NSArray *) psCompact;
 - (NSArray *) psSortedArrayUsingField: (NSString *) field ascending: (BOOL) ascending;

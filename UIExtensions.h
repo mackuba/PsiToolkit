@@ -7,6 +7,8 @@
 
 #if TARGET_OS_IPHONE
 
+#import <UIKit/UIKit.h>
+
 @interface UIAlertView (PsiToolkit)
 + (void) psShowAlertWithTitle: (NSString *) title message: (NSString *) message;
 + (void) psShowErrorWithMessage: (NSString *) message;

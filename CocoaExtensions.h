@@ -7,6 +7,8 @@
 
 #if !TARGET_OS_IPHONE
 
+#import <Cocoa/Cocoa.h>
+
 @interface NSControl (PsiToolkit)
 - (void) psDisable;
 - (void) psEnable;

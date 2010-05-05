@@ -5,6 +5,9 @@
 // Licensed under WTFPL license
 // -------------------------------------------------------
 
+#import <Foundation/Foundation.h>
+#import "Macros.h"
+
 #define PSIntArrayStop NSIntegerMin
 #define PSIntegers(...)   [PSIntArray arrayWithIntegers: __VA_ARGS__, PSIntArrayStop]
 
