@@ -53,6 +53,6 @@
 
 #define PSReleaseOnDealloc(...) \
   - (void) dealloc { \
-    ReleaseAll(__VA_ARGS__); \
+    PSRelease(__VA_ARGS__); \
     [super dealloc]; \
   }

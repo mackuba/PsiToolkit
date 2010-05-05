@@ -67,19 +67,20 @@
   return date;
 }
 
-- (BOOL) psIsEarlierThanOrEqualTo: (NSDate *) otherDate {
+- (BOOL) psIsEarlierOrSameDay: (NSDate *) otherDate {
   NSDate *current = [self psMidnight];
   NSDate *other = [otherDate psMidnight];
   return ([current earlierDate: other] == current);
 }
 
 - (NSDate *) psMidnight {
-  static NSDateFormatter *onlyDateFormatter = nil;
-  if (!onlyDateFormatter) {
-    onlyDateFormatter = [[NSDateFormatter alloc] init];
-    onlyDateFormatter.dateFormat = @"yyyy-MM-dd";
-  }
-  return [formatter dateFromString: [formatter stringFromDate: self]];
+  NSCalendar *calendar = [NSCalendar currentCalendar];
+  NSDateComponents *interval = [calendar components: NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit
+                                           fromDate: self];
+  interval.hour = -interval.hour;
+  interval.minute = -interval.minute;
+  interval.second = -interval.second;
+  return [calendar dateByAddingComponents: interval toDate: self options: 0];
 }
 
 - (NSString *) psJSONDateFormat {

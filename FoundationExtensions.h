@@ -13,7 +13,7 @@
 
 @interface NSDate (PsiToolkit)
 + (NSDateFormatter *) psJSONDateFormatter;
-- (BOOL) psIsEarlierThanOrEqualTo: (NSDate *) otherDate;
+- (BOOL) psIsEarlierOrSameDay: (NSDate *) otherDate;
 - (NSDate *) psDaysAgo: (NSInteger) days;
 - (NSDate *) psDaysFromNow: (NSInteger) days;
 - (NSDate *) psMidnight;
