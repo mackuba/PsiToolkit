@@ -6,7 +6,8 @@
 // -------------------------------------------------------
 
 #import "PSPathBuilder.h"
-#import "Macros.h"
+#import "PSMacros.h"
+#import "PSModel.h"
 
 @interface PSPathBuilder ()
 - (id) initWithBasePath: (NSString *) path;
