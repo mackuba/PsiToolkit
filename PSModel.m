@@ -17,8 +17,8 @@
 
 @implementation PSModel
 
-@synthesize recordId, properties;
-PSReleaseOnDealloc(recordId, properties);
+@synthesize recordId;
+PSReleaseOnDealloc(recordId);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Overridable methods
@@ -168,7 +168,7 @@ PSReleaseOnDealloc(recordId, properties);
 
 - (id) copyWithZone: (NSZone *) zone {
   id other = [[[self class] alloc] init];
-  for (NSString *property in properties) {
+  for (NSString *property in [[self class] properties]) {
     id value = [self valueForKey: property];
     [other setValue: value forKey: property];
   }

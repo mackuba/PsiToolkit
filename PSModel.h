@@ -11,11 +11,9 @@
 
 @interface PSModel : NSObject <NSCopying> {
   NSNumber *recordId;
-  NSArray *properties;
 }
 
 @property (nonatomic, copy) NSNumber *recordId;
-@property (nonatomic, readonly) NSArray *properties;
 
 + (NSString *) classNameForProperty: (NSString *) property;
 + (NSArray *) propertyList;
