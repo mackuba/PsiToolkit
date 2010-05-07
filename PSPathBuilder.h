@@ -17,8 +17,8 @@
 @property (nonatomic, readonly) NSString *path;
 
 // substitutes %d for record's id
-+ (PathBuilder *) builderWithBasePath: (NSString *) path record: (PSModel *) record;
-+ (PathBuilder *) builderWithBasePath: (NSString *) path;
++ (PSPathBuilder *) builderWithBasePath: (NSString *) path record: (PSModel *) record;
++ (PSPathBuilder *) builderWithBasePath: (NSString *) path;
 
 - (void) setObject: (id) value forKey: (NSString *) key;
 - (void) setInt: (NSInteger) number forKey: (NSString *) key;
