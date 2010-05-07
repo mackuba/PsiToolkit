@@ -9,6 +9,7 @@
 #import "PSFoundationExtensions.h"
 #import "PSIntArray.h"
 #import "PSModel.h"
+#import "PSPathBuilder.h"
 
 #if TARGET_OS_IPHONE
 #  import "PSUIExtensions.h"
