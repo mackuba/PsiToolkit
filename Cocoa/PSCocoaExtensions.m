@@ -5,7 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#if !TARGET_OS_IPHONE
+#ifdef PSITOOLKIT_ENABLE_COCOA
 
 #import "PSCocoaExtensions.h"
 

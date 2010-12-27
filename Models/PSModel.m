@@ -5,6 +5,8 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#ifdef PSITOOLKIT_ENABLE_MODELS
+
 #import "PSModel.h"
 #import "PSModelManager.h"
 #import "PSMacros.h"
@@ -198,3 +200,5 @@ PSReleaseOnDealloc(recordId);
 }
 
 @end
+
+#endif

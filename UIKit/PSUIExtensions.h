@@ -5,8 +5,6 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#if TARGET_OS_IPHONE
-
 #import <UIKit/UIKit.h>
 
 @interface UIAlertView (PsiToolkit)
@@ -33,5 +31,3 @@
 @interface UIViewController (PsiToolkit)
 - (void) psSetBackButtonTitle: (NSString *) title;
 @end
-
-#endif

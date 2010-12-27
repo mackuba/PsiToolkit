@@ -5,8 +5,6 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
-#if !TARGET_OS_IPHONE
-
 #import <Cocoa/Cocoa.h>
 
 @interface NSControl (PsiToolkit)
@@ -42,5 +40,3 @@
 - (void) psResizeHorizontallyBy: (CGFloat) pixels;
 - (void) psResizeHorizontallyTo: (CGFloat) position;
 @end
-
-#endif

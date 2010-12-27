@@ -5,6 +5,8 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#ifdef PSITOOLKIT_ENABLE_NETWORK
+
 #import "PSPathBuilder.h"
 #import "PSMacros.h"
 #import "PSModel.h"
@@ -50,3 +52,5 @@
 }
 
 @end
+
+#endif

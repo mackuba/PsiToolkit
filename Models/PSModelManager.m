@@ -5,6 +5,8 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#ifdef PSITOOLKIT_ENABLE_MODELS
+
 #import "PSModelManager.h"
 
 static NSMutableDictionary *managers;
@@ -37,3 +39,5 @@ static NSMutableDictionary *managers;
 }
 
 @end
+
+#endif
