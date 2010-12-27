@@ -2,7 +2,7 @@
 // PSPathBuilder.m
 //
 // Copyright (c) 2010 Jakub Suder <jakub.suder@gmail.com>
-// Licensed under WTFPL license
+// Licensed under MIT license
 // -------------------------------------------------------
 
 #import "PSPathBuilder.h"

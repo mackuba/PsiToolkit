@@ -33,5 +33,6 @@ For using PSModel, YAJL JSON parser is required (get it at
 
 ## License
 
-Copyright by Jakub Suder <jakub.suder at gmail.com>, licensed under [WTFPL license](http://sam.zoy.org/wtfpl/)
+Copyright by Jakub Suder <jakub.suder at gmail.com>, licensed under
+[MIT license](https://github.com/psionides/PsiToolkit/blob/master/MIT-LICENSE.txt)
 (which means you can do what the ... whatever you want to with it).
