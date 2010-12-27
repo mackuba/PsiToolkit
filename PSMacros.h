@@ -12,9 +12,16 @@
 #define PSDict(...)       [NSDictionary dictionaryWithObjectsAndKeys: __VA_ARGS__, nil]
 #define PSFloat(i)        [NSNumber numberWithFloat: i]
 #define PSFormat(...)     [NSString stringWithFormat: __VA_ARGS__]
-#define PSInt(i)          [NSNumber numberWithInt: i]
+#define PSInt(i)          [NSNumber numberWithInteger: i]
 #define PSIndex(sec, row) [NSIndexPath indexPathForRow: row inSection: sec]
 #define PSNull            [NSNull null]
+
+#define PSKilobyte 1024
+#define PSMegabyte (1024 * PSKilobyte)
+#define PSGigabyte (1024 * PSMegabyte)
+#define PSMinute   60
+#define PSHour     (60 * PSMinute)
+#define PSDay      (24 * PSHour)
 
 #define PSTranslate(text) NSLocalizedString(text, @"")
 
