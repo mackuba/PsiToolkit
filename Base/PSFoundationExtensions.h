@@ -28,7 +28,9 @@
 
 @interface NSString (PsiToolkit)
 - (BOOL) psIsBlank;
+- (BOOL) psContainsString: (NSString *) substring;
 - (NSString *) psCamelizedString;
+- (NSString *) psPluralizedString;
 - (NSString *) psStringWithPercentEscapesForFormValues;
 - (NSString *) psStringWithUppercaseFirstLetter;
 - (NSString *) psTrimmedString;

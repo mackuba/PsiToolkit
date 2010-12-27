@@ -102,6 +102,11 @@
   return (self.length == 0) || ([[self psTrimmedString] length] == 0);
 }
 
+- (BOOL) psContainsString: (NSString *) substring {
+  NSRange found = [self rangeOfString: substring];
+  return (found.location != NSNotFound);
+}
+
 - (NSString *) psCamelizedString {
   NSArray *words = [self componentsSeparatedByString: @"_"];
   if (words.count == 1) {
@@ -112,6 +117,23 @@
       [camelized appendString: [[words objectAtIndex: i] capitalizedString]];
     }
     return [camelized autorelease];
+  }
+}
+
+- (NSString *) psPluralizedString {
+  static NSDictionary *exceptions;
+  if (!exceptions) {
+    exceptions = [PSDict(@"people", @"person") retain];
+  }
+
+  NSString *downcased = [self lowercaseString];
+  NSString *result = [exceptions objectForKey: downcased];
+  if (result) {
+    return result;
+  } else if ([downcased hasSuffix: @"s"]) {
+    return downcased;
+  } else {
+    return [downcased stringByAppendingString: @"s"];
   }
 }
 

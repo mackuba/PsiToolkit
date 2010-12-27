@@ -24,6 +24,8 @@
 #define PSDay      (24 * PSHour)
 
 #define PSTranslate(text) NSLocalizedString(text, @"")
+#define PSiPadDevice      (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define PSiPhoneDevice    (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
 // from http://www.cimgf.com/2009/01/24/dropping-nslog-in-release-builds/
 #ifdef DEBUG
