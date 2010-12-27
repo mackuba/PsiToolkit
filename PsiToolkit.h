@@ -5,6 +5,7 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+#import "PSDependencies.h"
 #import "PSMacros.h"
 #import "PSFoundationExtensions.h"
 #import "PSIntArray.h"

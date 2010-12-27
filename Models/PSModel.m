@@ -39,6 +39,37 @@ PSReleaseOnDealloc(recordId);
 // -------------------------------------------------------------------------------------------
 #pragma mark Creating from JSON
 
+#ifdef PSITOOLKIT_ENABLE_MODELS_JSON
+
++ (id) valueFromJSONString: (NSString *) jsonString {
+  #if defined(PSITOOLKIT_USE_YAJL)
+    return [jsonString yajl_JSON];
+  #elif defined(PSITOOLKIT_USE_JSON_FRAMEWORK)
+    return [jsonString JSONValue];
+  #elif defined(PSITOOLKIT_USE_TOUCHJSON)
+    static CJSONDeserializer *deserializer;
+    if (!deserializer) {
+      deserializer = [[CJSONDeserializer deserializer] retain];
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding: NSUTF32BigEndianStringEncoding];
+    return [deserializer deserialize: jsonData error: nil];
+  #elif defined(PSITOOLKIT_USE_JSONKIT)
+    return [jsonString objectFromJSONString];
+  #endif
+}
+
++ (id) objectFromJSONString: (NSString *) jsonString {
+  NSDictionary *record = [self valueFromJSONString: jsonString];
+  return [self objectFromJSON: record];
+}
+
++ (NSArray *) objectsFromJSONString: (NSString *) jsonString {
+  NSArray *records = [self valueFromJSONString: jsonString];
+  return [self objectsFromJSON: records];
+}
+
+#endif // ifdef PSITOOLKIT_ENABLE_MODELS_JSON
+
 + (id) objectFromJSON: (NSDictionary *) json {
   // create a blank object
   PSModel *object = [[self alloc] init];
@@ -83,22 +114,12 @@ PSReleaseOnDealloc(recordId);
   return [object autorelease];
 }
 
-+ (id) objectFromJSONString: (NSString *) jsonString {
-  NSDictionary *record = [jsonString performSelector: @selector(yajl_JSON)];
-  return [self objectFromJSON: record];
-}
-
 + (NSArray *) objectsFromJSON: (NSArray *) jsonArray {
   NSMutableArray *objects = [NSMutableArray arrayWithCapacity: jsonArray.count];
   for (NSDictionary *record in jsonArray) {
     [objects addObject: [self objectFromJSON: record]];
   }
   return objects;
-}
-
-+ (NSArray *) objectsFromJSONString: (NSString *) jsonString {
-  NSArray *records = [jsonString performSelector: @selector(yajl_JSON)];
-  return [self objectsFromJSON: records];
 }
 
 // -------------------------------------------------------------------------------------------

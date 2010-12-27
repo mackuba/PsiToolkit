@@ -19,10 +19,22 @@
 + (NSString *) classNameForProperty: (NSString *) property;
 + (NSArray *) propertyList;
 
-+ (id) objectFromJSON: (NSDictionary *) json;
+#ifdef PSITOOLKIT_ENABLE_MODELS_JSON
+// parses NSObject (usually NSArray or NSDictionary) from a JSON string
++ (id) valueFromJSONString: (NSString *) jsonString;
+
+// parses a PSModel object from a JSON string
 + (id) objectFromJSONString: (NSString *) jsonString;
-+ (NSArray *) objectsFromJSON: (NSArray *) jsonArray;
+
+// parses a NSArray of PSModel objects from a JSON string
 + (NSArray *) objectsFromJSONString: (NSString *) jsonString;
+#endif
+
+// builds a PSModel object from a JSON dictionary
++ (id) objectFromJSON: (NSDictionary *) json;
+
+// builds a NSArray of PSModel objects from a NSArray of JSON dictionaries
++ (NSArray *) objectsFromJSON: (NSArray *) jsonArray;
 
 + (void) appendObjectsToList: (NSArray *) objects;
 + (void) prependObjectsToList: (NSArray *) objects;
