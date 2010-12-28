@@ -29,3 +29,7 @@
 #ifdef PSITOOLKIT_ENABLE_SECURITY
   #import "PSSecurityExtensions.h"
 #endif
+
+#if defined(PSITOOLKIT_ENABLE_SECURITY) && defined(PSITOOLKIT_ENABLE_MODELS)
+  #import "PSAccount.h"
+#endif
