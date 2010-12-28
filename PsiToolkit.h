@@ -25,3 +25,7 @@
 #ifdef PSITOOLKIT_ENABLE_MODELS
   #import "PSModel.h"
 #endif
+
+#ifdef PSITOOLKIT_ENABLE_SECURITY
+  #import "PSSecurityExtensions.h"
+#endif
