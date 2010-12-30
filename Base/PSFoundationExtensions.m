@@ -134,6 +134,28 @@
 
 @implementation NSString (PsiToolkit)
 
++ (NSString *) psStringWithFormEncodedFields: (NSDictionary *) fields {
+  NSMutableArray *parts = [[NSMutableArray alloc] initWithCapacity: fields.count];
+  for (NSString *field in fields) {
+    [parts addObject: PSFormat(@"%@=%@", field, [fields objectForKey: field])];
+  }
+
+  NSString *result = [parts componentsJoinedByString: @"&"];
+  [parts release];
+  return result;
+}
+
++ (NSString *) psStringWithFormEncodedFields: (NSDictionary *) fields ofModelNamed: (NSString *) name {
+  NSMutableArray *parts = [[NSMutableArray alloc] initWithCapacity: fields.count];
+  for (NSString *field in fields) {
+    [parts addObject: PSFormat(@"%@[%@]=%@", name, field, [fields objectForKey: field])];
+  }
+
+  NSString *result = [parts componentsJoinedByString: @"&"];
+  [parts release];
+  return result;
+}
+
 - (BOOL) psIsBlank {
   return (self.length == 0) || ([[self psTrimmedString] length] == 0);
 }
@@ -189,6 +211,45 @@
 
 - (NSString *) psTrimmedString {
   return [self stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
+}
+
+- (NSString *) psUnderscoreSeparatedString {
+  NSCharacterSet *uppercaseLetters = [NSCharacterSet uppercaseLetterCharacterSet];
+  NSScanner *scanner = [NSScanner localizedScannerWithString: self];
+  [scanner setCaseSensitive: YES];
+  NSMutableString *buffer = [[NSMutableString alloc] initWithCapacity: self.length];
+  NSString *part;
+  BOOL found;
+
+  while (true) {
+    found = [scanner scanUpToCharactersFromSet: uppercaseLetters intoString: &part];
+    if (!found) {
+      break;
+    }
+
+    [buffer appendString: part];
+
+    found = [scanner scanCharactersFromSet: uppercaseLetters intoString: &part];
+    if (!found) {
+      break;
+    }
+
+    if (![buffer hasSuffix: @"_"]) {
+      [buffer appendString: @"_"];
+    }
+
+    if (part.length > 1) {
+      [buffer appendString: [[part substringToIndex: part.length - 1] lowercaseString]];
+      [buffer appendString: @"_"];
+      [buffer appendString: [[part substringFromIndex: part.length - 1] lowercaseString]];
+    } else {
+      [buffer appendString: [part lowercaseString]];
+    }
+  }
+
+  NSString *result = [NSString stringWithString: buffer];
+  [buffer release];
+  return result;
 }
 
 @end

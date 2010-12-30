@@ -31,6 +31,8 @@
 @end
 
 @interface NSString (PsiToolkit)
++ (NSString *) psStringWithFormEncodedFields: (NSDictionary *) fields;
++ (NSString *) psStringWithFormEncodedFields: (NSDictionary *) fields ofModelNamed: (NSString *) name;
 - (BOOL) psIsBlank;
 - (BOOL) psContainsString: (NSString *) substring;
 - (NSString *) psCamelizedString;
@@ -38,4 +40,5 @@
 - (NSString *) psStringWithPercentEscapesForFormValues;
 - (NSString *) psStringWithUppercaseFirstLetter;
 - (NSString *) psTrimmedString;
+- (NSString *) psUnderscoreSeparatedString;
 @end

@@ -30,6 +30,15 @@ PSReleaseOnDealloc(numericRecordId);
   return [property psStringWithUppercaseFirstLetter];
 }
 
+// e.g. ZXActivityType => activity_types
++ (NSString *) routeName {
+  NSString *name = NSStringFromClass(self);
+  NSString *head = [name substringToIndex: 1];
+  NSString *tail = [name substringFromIndex: 1];
+  NSString *propertyForm = [[head lowercaseString] stringByAppendingString: tail];
+  return [[propertyForm psUnderscoreSeparatedString] psPluralizedString];
+}
+
 // e.g. PSArray(@"name", @"telephoneMain", @"address")
 + (NSArray *) propertyList {
   return [NSArray array];
@@ -254,6 +263,10 @@ PSReleaseOnDealloc(numericRecordId);
   return [[self recordId] intValue];
 }
 
+- (NSString *) toParam {
+  return [[self recordId] description];
+}
+
 - (NSString *) description {
   NSMutableString *result = [[NSMutableString alloc] initWithString: @"<"];
   [result appendString: NSStringFromClass([self class])];
@@ -271,6 +284,11 @@ PSReleaseOnDealloc(numericRecordId);
 
   [result appendString: @">"];
   return [result autorelease];
+}
+
+- (NSString *) encodeToPostData {
+  [self doesNotRecognizeSelector: _cmd];
+  return nil;
 }
 
 @end

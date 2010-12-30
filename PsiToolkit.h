@@ -20,7 +20,12 @@
 #endif
 
 #ifdef PSITOOLKIT_ENABLE_NETWORK
+  #import "PSConnector.h"
+  #import "PSConnectorAccount.h"
+  #import "PSConnectorDelegate.h"
   #import "PSPathBuilder.h"
+  #import "PSRequest.h"
+  #import "PSResponse.h"
 #endif
 
 #ifdef PSITOOLKIT_ENABLE_MODELS

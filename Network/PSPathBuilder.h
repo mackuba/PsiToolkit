@@ -7,8 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class PSModel;
-
 @interface PSPathBuilder : NSObject {
   NSMutableString *fullPath;
   BOOL hasParams;
@@ -16,11 +14,10 @@
 
 @property (nonatomic, readonly) NSString *path;
 
-// substitutes %d for record's id
-+ (PSPathBuilder *) builderWithBasePath: (NSString *) path record: (PSModel *) record;
 + (PSPathBuilder *) builderWithBasePath: (NSString *) path;
+- (id) initWithBasePath: (NSString *) path;
 
-- (void) setObject: (id) value forKey: (NSString *) key;
-- (void) setInt: (NSInteger) number forKey: (NSString *) key;
+- (void) addParameterWithName: (NSString *) param value: (id) value;
+- (void) addParameterWithName: (NSString *) param integerValue: (NSInteger) value;
 
 @end

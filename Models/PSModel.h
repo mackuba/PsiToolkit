@@ -15,6 +15,7 @@
 @property (nonatomic, readonly) NSInteger recordIdValue;
 
 + (NSString *) classNameForProperty: (NSString *) property;
++ (NSString *) routeName;
 + (NSArray *) propertyList;
 + (NSString *) recordIdProperty;
 
@@ -46,5 +47,9 @@
 
 - (void) removeObjectFromList;
 - (BOOL) isEqual: (id) other;
+- (NSString *) toParam;
+
+// abstract method - implement in subclasses if you want to use *RequestForObject helpers in PSConnector
+- (NSString *) encodeToPostData;
 
 @end
