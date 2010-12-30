@@ -88,6 +88,42 @@
 
 @end
 
+@implementation NSDictionary (PsiToolkit)
+
++ (NSDictionary *) psDictionaryWithKeysAndObjects: (id) firstObject, ... {
+  if (!firstObject) {
+    return [NSDictionary dictionary];
+  } else {
+    va_list args;
+    va_start(args, firstObject);
+
+    NSMutableArray *keys = [[NSMutableArray alloc] initWithCapacity: 5];
+    NSMutableArray *objects = [[NSMutableArray alloc] initWithCapacity: 5];
+    id object = firstObject;
+    BOOL isKey = YES;
+
+    do {
+      if (isKey) {
+        [keys addObject: object];
+      } else {
+        [objects addObject: object];
+      }
+      object = va_arg(args, id);
+      isKey = !isKey;
+    } while (object);
+
+    va_end(args);
+
+    NSDictionary *result = [NSDictionary dictionaryWithObjects: objects forKeys: keys];
+    [keys release];
+    [objects release];
+    return result;
+  }
+}
+
+@end
+
+
 @implementation NSNull (PsiToolkit)
 
 - (BOOL) psIsBlank {
@@ -123,7 +159,7 @@
 - (NSString *) psPluralizedString {
   static NSDictionary *exceptions;
   if (!exceptions) {
-    exceptions = [PSDict(@"people", @"person") retain];
+    exceptions = [PSHash(@"person", @"people") retain];
   }
 
   NSString *downcased = [self lowercaseString];

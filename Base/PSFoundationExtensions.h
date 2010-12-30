@@ -22,6 +22,10 @@
 - (NSString *) psJSONDateFormat;
 @end
 
+@interface NSDictionary (PsiToolkit)
++ (NSDictionary *) psDictionaryWithKeysAndObjects: (id) firstObject, ...;
+@end
+
 @interface NSNull (PsiToolkit)
 - (BOOL) psIsBlank;
 @end

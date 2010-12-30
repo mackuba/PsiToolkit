@@ -9,9 +9,9 @@
 
 #define PSArray(...)      [NSArray arrayWithObjects: __VA_ARGS__, nil]
 #define PSBool(...)       [NSNumber numberWithBool: __VA_ARGS__]
-#define PSDict(...)       [NSDictionary dictionaryWithObjectsAndKeys: __VA_ARGS__, nil]
 #define PSFloat(i)        [NSNumber numberWithFloat: i]
 #define PSFormat(...)     [NSString stringWithFormat: __VA_ARGS__]
+#define PSHash(...)       [NSDictionary psDictionaryWithKeysAndObjects: __VA_ARGS__, nil]
 #define PSInt(i)          [NSNumber numberWithInteger: i]
 #define PSIndex(sec, row) [NSIndexPath indexPathForRow: row inSection: sec]
 #define PSNull            [NSNull null]
