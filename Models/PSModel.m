@@ -20,8 +20,7 @@
 
 @implementation PSModel
 
-@synthesize recordId;
-PSReleaseOnDealloc(recordId);
+PSReleaseOnDealloc(numericRecordId);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Overridable methods
@@ -34,6 +33,10 @@ PSReleaseOnDealloc(recordId);
 // e.g. PSArray(@"name", @"telephoneMain", @"address")
 + (NSArray *) propertyList {
   return [NSArray array];
+}
+
++ (NSString *) recordIdProperty {
+  return @"numericRecordId";
 }
 
 // -------------------------------------------------------------------------------------------
@@ -88,7 +91,7 @@ PSReleaseOnDealloc(recordId);
       property = [[key substringToIndex: key.length - 3] psCamelizedString];
       Class targetClass = NSClassFromString([self classNameForProperty: property]);
       if ([targetClass isSubclassOfClass: [PSModel class]]) {
-        value = [targetClass objectWithId: value];
+        value = [targetClass objectWithId: value context: json];
       } else {
         continue;
       }
@@ -96,7 +99,7 @@ PSReleaseOnDealloc(recordId);
       // for other names, assign the value as is to a correct property
       if ([key isEqual: @"id"]) {
         // 'id' is saved as 'recordId'
-        property = PSModelRecordId;
+        property = [self recordIdProperty];
       } else if ([key hasSuffix: @"?"]) {
         // 'foo?' is saved as 'foo'
         property = [[key substringToIndex: key.length - 1] psCamelizedString];
@@ -137,12 +140,17 @@ PSReleaseOnDealloc(recordId);
   [[self identityMap] removeAllObjects];
 }
 
-+ (id) objectWithId: (NSNumber *) objectId {
++ (id) objectWithId: (id) objectId {
   return [[self identityMap] objectForKey: objectId];
 }
 
 + (id) objectWithIntegerId: (NSInteger) objectId {
   return [self objectWithId: PSInt(objectId)];
+}
+
++ (id) objectWithId: (id) objectId context: (id) context {
+  // override in subclasses to provide a different lookup, e.g. within a scope of another object
+  return [self objectWithId: objectId];
 }
 
 + (void) insertObjects: (NSArray *) objects atPosition: (NSInteger) position {
@@ -153,7 +161,9 @@ PSReleaseOnDealloc(recordId);
 
   NSMutableDictionary *identityMap = [self identityMap];
   for (id object in objects) {
-    [identityMap setObject: object forKey: [object valueForKey: PSModelRecordId]];
+    id recordId = [object recordId];
+    NSAssert1(recordId != nil, @"Can't add object with no recordId to list: %@", object);
+    [identityMap setObject: object forKey: recordId];
   }
 }
 
@@ -184,7 +194,10 @@ PSReleaseOnDealloc(recordId);
 + (NSArray *) properties {
   NSArray *properties = [[self modelManager] propertyList];
   if (!properties) {
-    properties = [[self propertyList] arrayByAddingObject: PSModelRecordId];
+    properties = [self propertyList];
+    if (![properties containsObject: [self recordIdProperty]]) {
+      properties = [properties arrayByAddingObject: [self recordIdProperty]];
+    }
     [[self modelManager] setPropertyList: properties];
   }
   return properties;
@@ -192,6 +205,21 @@ PSReleaseOnDealloc(recordId);
 
 // -------------------------------------------------------------------------------------------
 #pragma mark Instance methods
+
+- (void) removeObjectFromList {
+  NSMutableArray *list = [[self class] mutableList];
+  NSMutableDictionary *map = [[self class] identityMap];
+  NSUInteger position = [list indexOfObject: self];
+
+  if (position != NSNotFound) {
+    [[self retain] autorelease];
+    NSIndexSet *indexes = [NSIndexSet indexSetWithIndex: position];
+    [[self class] willChange: NSKeyValueChangeRemoval valuesAtIndexes: indexes forKey: @"list"];
+    [list removeObjectAtIndex: position];
+    [[self class] didChange: NSKeyValueChangeRemoval valuesAtIndexes: indexes forKey: @"list"];
+    [map removeObjectForKey: [self recordId]];
+  }
+}
 
 - (id) copyWithZone: (NSZone *) zone {
   id other = [[[self class] alloc] init];
@@ -204,20 +232,45 @@ PSReleaseOnDealloc(recordId);
 
 - (BOOL) isEqual: (id) other {
   if ([other isKindOfClass: [self class]]) {
-    id otherRecordId = [other valueForKey: PSModelRecordId];
-    id myRecordId = [self valueForKey: PSModelRecordId];
-    return [otherRecordId isEqual: myRecordId];
+    return [[other recordId] isEqual: [self recordId]];
   } else {
     return false;
   }
 }
 
 - (NSUInteger) hash {
-  return [[self valueForKey: PSModelRecordId] unsignedIntValue];
+  return [[self recordId] hash];
+}
+
+- (id) recordId {
+  return [self valueForKey: [[self class] recordIdProperty]];
+}
+
+- (void) setRecordId: (id) newId {
+  [self setValue: newId forKey: [[self class] recordIdProperty]];
 }
 
 - (NSInteger) recordIdValue {
-  return [recordId intValue];
+  return [[self recordId] intValue];
+}
+
+- (NSString *) description {
+  NSMutableString *result = [[NSMutableString alloc] initWithString: @"<"];
+  [result appendString: NSStringFromClass([self class])];
+  [result appendFormat: @": 0x%x", self];
+
+  NSArray *fields = [PSArray(@"recordId") arrayByAddingObjectsFromArray: [[self class] propertyList]];
+  for (NSString *property in fields) {
+    id value = [self valueForKey: property];
+    if ([value isKindOfClass: [NSString class]]) {
+      [result appendFormat: @", %@=\"%@\"", property, value];
+    } else {
+      [result appendFormat: @", %@=%@", property, value];
+    }
+  }
+
+  [result appendString: @">"];
+  return [result autorelease];
 }
 
 @end

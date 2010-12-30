@@ -7,17 +7,16 @@
 
 #import <Foundation/Foundation.h>
 
-#define PSModelRecordId @"recordId"
-
 @interface PSModel : NSObject <NSCopying> {
-  NSNumber *recordId;
+  NSNumber *numericRecordId;
 }
 
-@property (nonatomic, copy) NSNumber *recordId;
+@property (nonatomic, copy) id recordId;
 @property (nonatomic, readonly) NSInteger recordIdValue;
 
 + (NSString *) classNameForProperty: (NSString *) property;
 + (NSArray *) propertyList;
++ (NSString *) recordIdProperty;
 
 #ifdef PSITOOLKIT_ENABLE_MODELS_JSON
 // parses NSObject (usually NSArray or NSDictionary) from a JSON string
@@ -38,12 +37,14 @@
 
 + (void) appendObjectsToList: (NSArray *) objects;
 + (void) prependObjectsToList: (NSArray *) objects;
-+ (id) objectWithId: (NSNumber *) objectId;
++ (id) objectWithId: (id) objectId;
++ (id) objectWithId: (id) objectId context: (id) context;
 + (id) objectWithIntegerId: (NSInteger) objectId;
 + (NSInteger) count;
 + (NSArray *) list;
 + (void) reset;
 
+- (void) removeObjectFromList;
 - (BOOL) isEqual: (id) other;
 
 @end
