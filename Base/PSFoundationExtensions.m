@@ -126,8 +126,8 @@
 
 @implementation NSNull (PsiToolkit)
 
-- (BOOL) psIsBlank {
-  return YES;
+- (BOOL) psIsPresent {
+  return NO;
 }
 
 @end
@@ -156,8 +156,8 @@
   return result;
 }
 
-- (BOOL) psIsBlank {
-  return (self.length == 0) || ([[self psTrimmedString] length] == 0);
+- (BOOL) psIsPresent {
+  return ([[self psTrimmedString] length] > 0);
 }
 
 - (BOOL) psContainsString: (NSString *) substring {

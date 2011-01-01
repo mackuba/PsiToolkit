@@ -62,7 +62,7 @@ PSReleaseOnDealloc(username, password);
 - (BOOL) hasAllRequiredProperties {
   for (NSString *property in [[self class] propertiesSavedInSettings]) {
     NSString *value = [self valueForKey: property];
-    if (!value || [value psIsBlank]) {
+    if (PSIsBlank(value)) {
       return NO;
     }
   }

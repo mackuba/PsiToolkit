@@ -27,13 +27,13 @@
 @end
 
 @interface NSNull (PsiToolkit)
-- (BOOL) psIsBlank;
+- (BOOL) psIsPresent;
 @end
 
 @interface NSString (PsiToolkit)
 + (NSString *) psStringWithFormEncodedFields: (NSDictionary *) fields;
 + (NSString *) psStringWithFormEncodedFields: (NSDictionary *) fields ofModelNamed: (NSString *) name;
-- (BOOL) psIsBlank;
+- (BOOL) psIsPresent;
 - (BOOL) psContainsString: (NSString *) substring;
 - (NSString *) psCamelizedString;
 - (NSString *) psPluralizedString;

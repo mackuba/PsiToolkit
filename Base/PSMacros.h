@@ -15,6 +15,7 @@
 #define PSNull            [NSNull null]
 
 #define PSTranslate(text) NSLocalizedString(text, @"")
+#define PSIsBlank(x)      (![(x) psIsPresent])
 #define PSiPadDevice      (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define PSiPhoneDevice    (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
