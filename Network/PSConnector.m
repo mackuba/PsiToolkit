@@ -78,7 +78,7 @@ static PSConnector *sharedConnector = nil;
 }
 
 - (void) setRouter: (id) newRouter {
-  NSAssert1([newRouter conformsToProtocol: @protocol(PSRouter)],
+  NSAssert1(newRouter == nil || [newRouter conformsToProtocol: @protocol(PSRouter)],
     @"This object doesn't implement PSRouter protocol and can't be used as a router: %@", newRouter);
   if (newRouter != router) {
     [router release];
@@ -87,7 +87,7 @@ static PSConnector *sharedConnector = nil;
 }
 
 - (void) setAccount: (id) newAccount {
-  NSAssert1([newAccount conformsToProtocol: @protocol(PSConnectorAccount)],
+  NSAssert1(newAccount == nil || [newAccount conformsToProtocol: @protocol(PSConnectorAccount)],
     @"This object doesn't implement PSConnectorAccount protocol and can't be used as an account: %@", newAccount);
   if (newAccount != account) {
     [account release];
