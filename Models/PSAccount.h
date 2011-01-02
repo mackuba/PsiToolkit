@@ -25,7 +25,9 @@
 #import <Foundation/Foundation.h>
 #import "PSModel.h"
 
-@interface PSAccount : PSModel {
+@protocol PSConnectorAccount;
+
+@interface PSAccount : PSModel <PSConnectorAccount> {
   NSString *username;
   NSString *password;
 }
