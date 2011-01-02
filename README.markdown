@@ -53,7 +53,8 @@ For using some methods of PSModel, a JSON parser is required. The Network module
 
 The Security module uses either [SDKeychain](https://github.com/sdegutis/SDKeychain) by Steven Degutis or
 [SFHFKeychainUtils](https://github.com/ldandersen/scifihifi-iphone) by Buzz Andersen (both are already bundled inside
-PsiToolkit).
+PsiToolkit). Both of these require adding `Security.framework` (provided in the SDK) to the project (see Add -> Existing
+Frameworks...).
 
 ## Available classes
 
@@ -84,6 +85,8 @@ Requires [ASIHTTPRequest](http://allseeing-i.com/ASIHTTPRequest).
 * PSRestRouter - generates URLs for some helper methods in PSConnector. **Requires Models module**.
 
 ### Security
+
+Requires `Security.framework`.
 
 * PSSecurityExtensions - methods for setting and reading passwords from the Keychain (both on MacOSX and iOS)
 
