@@ -1,9 +1,13 @@
 // -------------------------------------------------------
 // PSResponse.h
 //
-// Copyright (c) 2010 Jakub Suder <jakub.suder@gmail.com>
+// Copyright (c) 2010-11 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
 // -------------------------------------------------------
+
+/*
+  Helper class that wraps some of the PSRequest's fields - accessible as request.response.
+*/
 
 #import <Foundation/Foundation.h>
 
@@ -20,7 +24,11 @@
 @property (nonatomic, readonly) NSInteger status;
 
 - (id) initWithRequest: (PSRequest *) request;
+
+// tells if the response is (probably) human-readable
 - (BOOL) hasReadableContentType;
+
+// tells if the returned content type matches what the request expected (as set in expectedContentType)
 - (BOOL) matchesExpectedContentType;
 
 @end

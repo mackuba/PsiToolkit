@@ -1,7 +1,7 @@
 // -------------------------------------------------------
 // PSModel.m
 //
-// Copyright (c) 2010 Jakub Suder <jakub.suder@gmail.com>
+// Copyright (c) 2010-11 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
 // -------------------------------------------------------
 
@@ -44,6 +44,7 @@ PSReleaseOnDealloc(numericRecordId);
   return [NSArray array];
 }
 
+// change only if you want a custom record id field
 + (NSString *) recordIdProperty {
   return @"numericRecordId";
 }

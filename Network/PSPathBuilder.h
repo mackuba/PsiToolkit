@@ -5,6 +5,21 @@
 // Licensed under MIT license
 // -------------------------------------------------------
 
+/*
+  Helper for building paths with parameters. Used internally by PSRequest, but can also be used by itself.
+
+  Usage:
+      PSPathBuilder *builder = [PSPathBuilder builderWithBasePath: @"/messages"];
+      if (last) {
+        [builder addParameterWithName: @"since" integerValue: last];
+      } else {
+        [builder addParameterWithName: @"limit" integerValue: 20];
+      }
+      [builder addParameterWithName: @"include" value: @"author"];
+
+      NSLog(@"%@", [builder path]);  // e.g. /messages?since=123&include=author
+*/
+
 #import <Foundation/Foundation.h>
 
 @interface PSPathBuilder : NSObject {
@@ -12,6 +27,7 @@
   BOOL hasParams;
 }
 
+// returns full path with all parameters added
 @property (nonatomic, readonly) NSString *path;
 
 + (PSPathBuilder *) builderWithBasePath: (NSString *) path;

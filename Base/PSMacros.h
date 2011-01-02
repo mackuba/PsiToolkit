@@ -1,7 +1,7 @@
 // -------------------------------------------------------
 // PSMacros.h
 //
-// Copyright (c) 2010 Jakub Suder <jakub.suder@gmail.com>
+// Copyright (c) 2010-11 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
 // -------------------------------------------------------
 
@@ -53,6 +53,7 @@
   } \
   [_releaseList release];
 
+// best used right below "@synthesize" line
 #define PSReleaseOnDealloc(...) \
   - (void) dealloc { \
     PSRelease(__VA_ARGS__); \

@@ -1,12 +1,14 @@
 // -------------------------------------------------------
 // PSFoundationExtensions.m
 //
-// Copyright (c) 2010 Jakub Suder <jakub.suder@gmail.com>
+// Copyright (c) 2010-11 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
 // -------------------------------------------------------
 
 #import "PSFoundationExtensions.h"
 #import "PSMacros.h"
+
+// ------------------------------------------------------------------------------------------------
 
 @implementation NSArray (PsiToolkit)
 
@@ -44,6 +46,8 @@
 }
 
 @end
+
+// ------------------------------------------------------------------------------------------------
 
 @implementation NSDate (PsiToolkit)
 
@@ -88,6 +92,8 @@
 
 @end
 
+// ------------------------------------------------------------------------------------------------
+
 @implementation NSDictionary (PsiToolkit)
 
 + (NSDictionary *) psDictionaryWithKeysAndObjects: (id) firstObject, ... {
@@ -123,6 +129,7 @@
 
 @end
 
+// ------------------------------------------------------------------------------------------------
 
 @implementation NSNull (PsiToolkit)
 
@@ -131,6 +138,8 @@
 }
 
 @end
+
+// ------------------------------------------------------------------------------------------------
 
 @implementation NSString (PsiToolkit)
 

@@ -1,7 +1,7 @@
 // -------------------------------------------------------
 // PSUIExtensions.m
 //
-// Copyright (c) 2010 Jakub Suder <jakub.suder@gmail.com>
+// Copyright (c) 2010-11 Jakub Suder <jakub.suder@gmail.com>
 // Licensed under MIT license
 // -------------------------------------------------------
 
@@ -9,6 +9,8 @@
 
 #import "PSMacros.h"
 #import "PSUIExtensions.h"
+
+// ------------------------------------------------------------------------------------------------
 
 @implementation UIAlertView (PsiToolkit)
 
@@ -27,6 +29,8 @@
 }
 
 @end
+
+// ------------------------------------------------------------------------------------------------
 
 @implementation UIView (PsiToolkit)
 
@@ -80,6 +84,8 @@
 
 @end
 
+// ------------------------------------------------------------------------------------------------
+
 @implementation UITableView (PsiToolkit)
 
 - (UITableViewCell *) psCellWithStyle: (UITableViewCellStyle) style andIdentifier: (NSString *) identifier {
@@ -95,6 +101,8 @@
 }
 
 @end
+
+// ------------------------------------------------------------------------------------------------
 
 @implementation UIViewController (PsiToolkit)
 
