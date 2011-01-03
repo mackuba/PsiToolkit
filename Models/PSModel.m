@@ -16,6 +16,7 @@
 + (NSArray *) properties;
 + (NSMutableArray *) mutableList;
 + (NSMutableDictionary *) identityMap;
++ (NSString *) collectionElementsCount: (id) collection;
 @end
 
 @implementation PSModel
@@ -274,13 +275,24 @@ PSReleaseOnDealloc(numericRecordId);
   [result appendFormat: @": 0x%x", self];
 
   NSArray *fields = [PSArray(@"recordId") arrayByAddingObjectsFromArray: [[self class] propertyList]];
+  id value, output;
+
   for (NSString *property in fields) {
-    id value = [self valueForKey: property];
+    value = [self valueForKey: property];
+
     if ([value isKindOfClass: [NSString class]]) {
-      [result appendFormat: @", %@=\"%@\"", property, value];
+      output = PSFormat(@"\"%@\"", value);
+    } else if ([value isKindOfClass: [NSArray class]]) {
+      output = PSFormat(@"[%@]", [PSModel collectionElementsCount: value]);
+    } else if ([value isKindOfClass: [NSDictionary class]]) {
+      output = PSFormat(@"{%@}", [PSModel collectionElementsCount: value]);
+    } else if ([value isKindOfClass: [PSModel class]]) {
+      output = PSFormat(@"<%@: 0x%x, recordId=%@>", NSStringFromClass([value class]), value, [value recordId]);
     } else {
-      [result appendFormat: @", %@=%@", property, value];
+      output = value;
     }
+
+    [result appendFormat: @", %@=%@", property, output];
   }
 
   [result appendString: @">"];
