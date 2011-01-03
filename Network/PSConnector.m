@@ -95,6 +95,12 @@ static PSConnector *sharedConnector = nil;
   }
 }
 
+- (void) log: (NSString *) text {
+  if (loggingEnabled) {
+    NSLog(@"%@", text);
+  }
+}
+
 #ifdef PSITOOLKIT_ENABLE_MODELS
 
 - (PSRequest *) createRequestForObject: (PSModel *) object {
