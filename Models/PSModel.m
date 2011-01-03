@@ -304,6 +304,15 @@ PSReleaseOnDealloc(numericRecordId);
   return nil;
 }
 
++ (NSString *) collectionElementsCount: (id) collection {
+  NSInteger count = [collection count];
+  switch (count) {
+    case 0: return @"";
+    case 1: return @"1 element";
+    default: return PSFormat(@"%d elements", count);
+  }
+}
+
 @end
 
 #endif
