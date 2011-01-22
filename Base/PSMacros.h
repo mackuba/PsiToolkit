@@ -19,6 +19,8 @@
 #define PSiPadDevice      (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define PSiPhoneDevice    (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 
+#define PSAbstractMethod(returnType) { [self doesNotRecognizeSelector: _cmd]; return (returnType) 0; }
+
 // from http://www.cimgf.com/2009/01/24/dropping-nslog-in-release-builds/
 #ifdef DEBUG
   #define PSLog(...) NSLog(__VA_ARGS__)
