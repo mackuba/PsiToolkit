@@ -61,3 +61,16 @@
     PSRelease(__VA_ARGS__); \
     [super dealloc]; \
   }
+
+// synthesize + PSModel's propertyList
+#define PSModelProperties(...) \
+  @synthesize __VA_ARGS__;  \
+  + (NSArray *) propertyList { \
+    static NSArray *list = nil; \
+    if (!list) { \
+      NSArray *superlist = [super propertyList]; \
+      NSArray *mylist = [[@#__VA_ARGS__ componentsSeparatedByString: @","] psArrayByCalling: @selector(psTrimmedString)]; \
+      list = [[superlist arrayByAddingObjectsFromArray: mylist] retain]; \
+    } \
+    return list; \
+  }
