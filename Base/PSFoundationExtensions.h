@@ -11,8 +11,17 @@
 
 @interface NSArray (PsiToolkit)
 
+// returns object at index 0, or nil if array is empty
+- (id) psFirstObject;
+
+// returns results of calling given selector on all elements
+- (NSArray *) psArrayByCalling: (SEL) selector;
+
 // returns the array with NSNull values removed
 - (NSArray *) psCompact;
+
+// returns the array filtered using a given predicate (see NSPredicate docs)
+- (NSArray *) psFilterWithPredicate: (NSString *) filter;
 
 // returns the array sorted by values of a given property
 - (NSArray *) psSortedArrayUsingField: (NSString *) field ascending: (BOOL) ascending;
@@ -59,6 +68,15 @@
 
 // for NSNull, always returns NO
 - (BOOL) psIsPresent;
+@end
+
+// ------------------------------------------------------------------------------------------------
+
+@interface NSObject (PsiToolkit)
+
+// returns results of calling given selector on self, passing each element from the array in argument
++ (NSArray *) psArrayByCalling: (SEL) selector withObjectsFrom: (NSArray *) array;
+- (NSArray *) psArrayByCalling: (SEL) selector withObjectsFrom: (NSArray *) array;
 @end
 
 // ------------------------------------------------------------------------------------------------
