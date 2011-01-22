@@ -16,6 +16,7 @@
 
 // returns the array sorted by values of a given property
 - (NSArray *) psSortedArrayUsingField: (NSString *) field ascending: (BOOL) ascending;
+- (NSArray *) psSortedArrayUsingField: (NSString *) field ascending: (BOOL) ascending compareWith: (SEL) compareMethod;
 
 // returns a dictionary grouping elements by all possible values of one property: { value => [matching elements] }
 - (NSDictionary *) psGroupByKey: (NSString *) key;

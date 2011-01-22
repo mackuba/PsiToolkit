@@ -21,9 +21,13 @@
 }
 
 - (NSArray *) psSortedArrayUsingField: (NSString *) field ascending: (BOOL) ascending {
+  return [self psSortedArrayUsingField: field ascending: ascending compareWith: @selector(compare:)];
+}
+
+- (NSArray *) psSortedArrayUsingField: (NSString *) field ascending: (BOOL) ascending compareWith: (SEL) compareMethod {
   NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey: field
                                                              ascending: ascending
-                                                              selector: @selector(caseInsensitiveCompare:)];
+                                                              selector: compareMethod];
   NSArray *descriptors = [[NSArray alloc] initWithObjects: descriptor, nil];
   NSArray *sortedArray = [self sortedArrayUsingDescriptors: descriptors];
   [descriptor release];
