@@ -24,7 +24,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PSModel : NSObject <NSCopying> {
+#ifdef PSITOOLKIT_PSMODEL_IMPORT
+  #import PSITOOLKIT_PSMODEL_IMPORT 
+#endif
+
+#ifndef PSITOOLKIT_PSMODEL_BASE_CLASS
+  #define PSITOOLKIT_PSMODEL_BASE_CLASS NSObject
+#endif
+
+@interface PSModel : PSITOOLKIT_PSMODEL_BASE_CLASS <NSCopying> {
   NSNumber *numericRecordId;
 }
 
