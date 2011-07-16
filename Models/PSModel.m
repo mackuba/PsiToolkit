@@ -233,13 +233,13 @@ PSReleaseOnDealloc(numericRecordId);
     }
 
     if ([properties containsObject: property]) {
-      if (!value) {
-        value = PSNull;
+      if ([value isEqual: PSNull]) {
+        value = nil;
       }
 
       if (onlyMissing && [self valueForKey: property]) {
         continue;
-      } else if (skipNullValues && [value isEqual: PSNull]) {
+      } else if (skipNullValues && !value) {
         continue;
       } else {
         [self setValue: value forKey: property];
