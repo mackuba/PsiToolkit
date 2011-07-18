@@ -1,20 +1,15 @@
 # PsiToolkit
 
+**Update: This project is unmaintained and will not be developed further. Use it at your own risk. If it explodes and kills your cat, don't blame me.**
+
 This project was started as my personal collection of various useful ObjC methods - extensions to native Cocoa, UIKit
 and Foundation classes, which I used in several projects, and I figured it's better to keep them in one place. I've been
 adding more and more things to it over time and it grew into a kind of micro framework. I hope someone else will finds
-this stuff useful too. I can't guarantee anything though, so if it kills your cat or something, that's your problem
-(and your cat's).
-
-If you like the idea but not the implementation, check out [RestKit](https://github.com/twotoasters/RestKit) too - which
-is something very similar, though probably more mature (I admit I ripped off a few ideas from them...).
+this stuff useful too.
 
 ## Usage
 
-Add the whole directory to your Xcode project. You don't need to add the stuff on the root level, except `PsiToolkit.h`,
-and you don't need the bridge support files (`Bridges/*`), unless you're writing an app in MacRuby or other similar
-language. If you do use MacRuby, then add the bridge support files too, otherwise you may get some hard to spot bugs
-(like boolean methods returning true when they shouldn't, etc.).
+Add the whole directory to your Xcode project. You don't need to add the stuff on the root level, except `PsiToolkit.h`.
 
 The code is divided into several "modules" which can be enabled or disabled. Only the "Base" one is required, the rest
 is optional. You don't have to add the modules which you don't use into Xcode, though if you do, they will just be
